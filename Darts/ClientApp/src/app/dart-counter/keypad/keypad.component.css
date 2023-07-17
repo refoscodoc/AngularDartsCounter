@@ -1,0 +1,44 @@
+.keypad-main{
+  display: grid;
+  width: 100%;
+  align-items: center;
+  justify-items: center;
+  bottom: 0;
+}
+.keypad-common{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: 30px;
+  align-items: center;
+  justify-items: center;
+}
+
+button{
+  width: 10vw;
+  border: 1px solid whitesmoke;
+}
+
+.special-button{
+  width: 15vw;
+}
+
+.side-button{
+  width: 25vw;
+}
+
+.side-buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+/*.vertical-text {*/
+/*  transform: rotate(90deg);*/
+/*  transform-origin: right, top;*/
+/*  -ms-transform: rotate(90deg);*/
+/*  -ms-transform-origin:right, top;*/
+/*  -webkit-transform: rotate(90deg);*/
+/*  -webkit-transform-origin:right, top;*/
+/*  color: #ed217c;*/
+/*}*/

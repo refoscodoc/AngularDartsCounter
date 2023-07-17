@@ -1,0 +1,33 @@
+<div class="home-main">
+  <div class="players-selection" *ngIf="!gameHasStarted">
+    <h2>
+      Select The Players Here
+    </h2>
+    <div class="counter">
+      <button type="text" class="btn btn-primary" (click)="decrement()">-</button>
+      <h1>{{playerNum}}</h1>
+      <button type="text" class="btn btn-primary" (click)="increment()">+</button>
+    </div>
+    <button class="ready-button" mat-flat-button color="warn" value="1" (click)="startGame()">Ready</button>
+  </div>
+  <div class="game-header" *ngIf="gameHasStarted">
+    <h2>
+      Game In Progress...
+    </h2>
+<!--    <div class="counter">-->
+<!--      <button type="text" class="btn btn-primary" (click)="decrement()">-</button>-->
+<!--      <h1>{{playerNum}}</h1>-->
+<!--      <button type="text" class="btn btn-primary" (click)="increment()">+</button>-->
+<!--    </div>-->
+    <button class="stop-button" mat-flat-button color="warn" value="1" (click)="stopGame()">Abort Game</button>
+  </div>
+  <div class="players-boxes" >
+    <app-player-box *ngFor="let player of players$ | async" [player]="player" [gameHasStarted]="gameHasStarted" />
+  </div>
+  <div class="keypad">
+    <app-keypad (selection)="addThrow($event)"/>
+  </div>
+</div>
+
+
+

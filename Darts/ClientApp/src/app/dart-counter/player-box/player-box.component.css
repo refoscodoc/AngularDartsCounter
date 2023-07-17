@@ -1,0 +1,15 @@
+.main-box{
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 750px;
+  border: 1px solid black;
+  border-radius: 15px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-bar {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}

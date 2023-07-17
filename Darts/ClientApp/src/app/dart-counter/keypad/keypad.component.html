@@ -1,0 +1,37 @@
+<div class="keypad-main">
+  <div class="side-buttons">
+    <button mat-flat-button color="accent" class="side-button" value="delete" (click)="turnManager('BACK')">Back</button>
+    <button mat-flat-button color="warn" class="side-button" value="accept">Submit</button>
+  </div>
+  <div class="keypad-common">
+    <button mat-flat-button color="primary" value="1" (click)="turnManager('1')">1</button>
+    <button mat-flat-button color="primary" value="2" (click)="turnManager('2')">2</button>
+    <button mat-flat-button color="primary" value="3" (click)="turnManager('3')">3</button>
+    <button mat-flat-button color="primary" value="4" (click)="turnManager('4')">4</button>
+    <button mat-flat-button color="primary" value="5" (click)="turnManager('5')">5</button>
+    <button mat-flat-button color="primary" value="6" (click)="turnManager('6')">6</button>
+    <button mat-flat-button color="primary" value="7" (click)="turnManager('7')">17</button>
+    <button mat-flat-button color="primary" value="8" (click)="turnManager('8')">8</button>
+    <button mat-flat-button color="primary" value="9" (click)="turnManager('9')">9</button>
+    <button mat-flat-button color="primary" value="10" (click)="turnManager('10')">10</button>
+    <button mat-flat-button color="primary" value="11" (click)="turnManager('11')">11</button>
+    <button mat-flat-button color="primary" value="12" (click)="turnManager('12')">12</button>
+    <button mat-flat-button color="primary" value="13" (click)="turnManager('13')">13</button>
+    <button mat-flat-button color="primary" value="14" (click)="turnManager('14')">14</button>
+    <button mat-flat-button color="primary" value="15" (click)="turnManager('15')">15</button>
+    <button mat-flat-button color="primary" value="16" (click)="turnManager('16')">16</button>
+    <button mat-flat-button color="primary" value="17" (click)="turnManager('17')">17</button>
+    <button mat-flat-button color="primary" value="18" (click)="turnManager('18')">18</button>
+    <button mat-flat-button color="primary" value="19" (click)="turnManager('19')">19</button>
+    <button mat-flat-button color="primary" value="20" (click)="turnManager('20')">20</button>
+  </div>
+  <div class="bottom-buttons">
+    <button mat-flat-button color="primary" value="25">25</button>
+    <button mat-flat-button color="warn" [style.background-color]="dBtnColour" class="special-button" value="double" (click)="changeDouble()">Double</button>
+    <button mat-flat-button color="warn" [style.background-color]="tBtnColour" class="special-button" value="treble" (click)="changeTriple()">Treble</button>
+    <button mat-flat-button color="accent" value="25" (click)="turnManager('MISS')">Miss</button>
+  </div>
+</div>
+
+
+
