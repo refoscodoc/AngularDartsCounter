@@ -64,30 +64,35 @@ export class HomeComponent {
   }
 
   addThrow(newThrow: string): void{
+    console.log(newThrow)
 
     let throwValue: number = 0;
 
-    if(newThrow !== "MISS") throwValue = parseInt(newThrow.substring(1))
+    if(newThrow !== "MISS" && newThrow !== "SBACK") throwValue = parseInt(newThrow.substring(1))
     let double: boolean = false;
     let treble: boolean = false;
+    let back: boolean = false;
 
     if(newThrow.charAt(0) == "D") double = true;
     if(newThrow.charAt(0) == "T") treble = true;
 
-    console.log("multiplier : " + newThrow.charAt(0))
+    if(newThrow !== "SBACK"){
+      this.legResult.push(newThrow);
+    }
 
-    this.legResult.push(newThrow);
+    console.log(this.legResult)
 
     this.players$.subscribe(players =>
     {
-      // try to break here, before the next iteration - maybe i'm wrong
       players.some(
         player => {
-        console.log("PlayerId " + player.id)
-        console.log("CurrentPlayerId " + this.currentPlayerId)
-        if (player.id == this.currentPlayerId) {
-          // console.log(this.currentPlayerId)
-          // console.log(this.legResult)
+
+        if(newThrow === "SBACK" && player.score < 501 && this.legResult.length > 0){
+          player.score += parseInt(this.legResult[this.legResult.length-1].substring(1));
+          this.legResult.pop();
+          back = true;
+        }
+        if (player.id == this.currentPlayerId && !back) {
 
           if(double) throwValue = throwValue * 2;
           if(treble) throwValue = throwValue * 3;
@@ -95,20 +100,9 @@ export class HomeComponent {
           player.score -= throwValue;
           if(this.legResult.length == 3) {
             player.legResult.push(this.legResult);
-            console.log("this.legResult.length 3 long")
-            console.log(this.currentPlayerId)
-            console.log(this.playerNum)
-            // if(this.currentPlayerId+1 == this.playerNum) {
-            //   this.currentPlayerId = 0;
-            // } else {
-            //   this.currentPlayerId = this.currentPlayerId + 1;
-            // }
-            // this.legResult = [];
-            // if(this.currentPlayerId > (this.playerNum - 1)){
-            //   this.currentPlayerId = 0;
-            // }
           }
         }
+        back = false;
       })
     })
     if(this.legResult.length == 3){
