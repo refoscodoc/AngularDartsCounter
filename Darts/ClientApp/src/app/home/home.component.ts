@@ -39,7 +39,6 @@ export class HomeComponent {
           isCurrent: false
         })
       })).subscribe();
-      console.log(this.playerNum)
     }
   }
   decrement(): void{
@@ -50,7 +49,6 @@ export class HomeComponent {
         players.pop()
       })).subscribe()
     }
-    console.log(this.players$)
   }
 
   ngOnInit() {
@@ -66,30 +64,61 @@ export class HomeComponent {
   }
 
   addThrow(newThrow: string): void{
+
     let throwValue: number = 0;
 
     if(newThrow !== "MISS") throwValue = parseInt(newThrow.substring(1))
+    let double: boolean = false;
+    let treble: boolean = false;
 
-    if(this.currentPlayerId > (this.playerNum - 1)){
-      this.currentPlayerId = 0;
-    }
+    if(newThrow.charAt(0) == "D") double = true;
+    if(newThrow.charAt(0) == "T") treble = true;
+
+    console.log("multiplier : " + newThrow.charAt(0))
 
     this.legResult.push(newThrow);
 
-    this.players$.subscribe(players => {
-      players.map(player => {
-        if (player.id === this.currentPlayerId) {
-          console.log(player.score + " " + throwValue)
+    this.players$.subscribe(players =>
+    {
+      // try to break here, before the next iteration - maybe i'm wrong
+      players.some(
+        player => {
+        console.log("PlayerId " + player.id)
+        console.log("CurrentPlayerId " + this.currentPlayerId)
+        if (player.id == this.currentPlayerId) {
+          // console.log(this.currentPlayerId)
+          // console.log(this.legResult)
+
+          if(double) throwValue = throwValue * 2;
+          if(treble) throwValue = throwValue * 3;
+
           player.score -= throwValue;
-          if(this.legResult.length <= 2) {
+          if(this.legResult.length == 3) {
             player.legResult.push(this.legResult);
-            this.legResult = [];
+            console.log("this.legResult.length 3 long")
+            console.log(this.currentPlayerId)
+            console.log(this.playerNum)
+            // if(this.currentPlayerId+1 == this.playerNum) {
+            //   this.currentPlayerId = 0;
+            // } else {
+            //   this.currentPlayerId = this.currentPlayerId + 1;
+            // }
+            // this.legResult = [];
+            // if(this.currentPlayerId > (this.playerNum - 1)){
+            //   this.currentPlayerId = 0;
+            // }
           }
-          console.log(player.score);
-          console.log(player.id);
-          console.log(this.currentPlayerId);
         }
       })
     })
+    if(this.legResult.length == 3){
+      if(this.currentPlayerId+1 == this.playerNum) {
+        this.currentPlayerId = 0;
+        this.legResult = [];
+      } else {
+        this.currentPlayerId = this.currentPlayerId + 1;
+        this.legResult = [];
+      }
+    }
   }
 }
